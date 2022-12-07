@@ -9,17 +9,17 @@ type MenuItemProps = {
 function MenuItem({ categorie }: MenuItemProps) {
 	return (
 		<Link
-			href={`/${categorie}`}
-			className="flex grou flex-col p-2 pl-3 pr-3 md:flex-row items-center cursor-pointer hover:bg-slate-700/5 hover:text-white-500 rounded-sm"
+			href={`/${categorie.toLowerCase()}`}
+			className="flex flex-col flex-1 md:flex-none p-2 md:flex-row items-center cursor-pointer hover:bg-slate-700/5 hover:text-white-500 rounded-sm"
 		>
 			<img
 				src={`/icons/${categorie.toLowerCase()}.svg`}
-				height="25px"
-				width="25px"
+				height="23px"
+				width="23px"
 				alt=""
 				className="md:m-2"
 			/>
-			<p className="text-gray-500 ">{categorie}</p>
+			<p className="text-gray-500 text-xs">{categorie}</p>
 		</Link>
 	);
 }
