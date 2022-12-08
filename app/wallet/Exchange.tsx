@@ -11,9 +11,9 @@ function Exchange() {
 						onChange={(e) => setInput(e.target.value)}
 						type="number"
 						min="0"
-						className="bg-transparent w-full outline-0"
+						className="bg-transparent w-full outline-none"
 					/>
-					<select className="rounded-md">
+					<select className="rounded-md outline-none">
 						<option value="Bitcoin">BTC</option>
 						<option value="Bitcoin">USD</option>
 						<option value="Bitcoin">EUR</option>
@@ -22,7 +22,7 @@ function Exchange() {
 				<h3 className="text-sm text-slate-600">For</h3>
 				<div className="mt-2 md:mt-0 bg-slate-200 flex justify-between w-full rounded-md">
 					<p className="w-full" />
-					<select className="rounded-md bg-slate-200 text-slate-400">
+					<select className="rounded-md bg-slate-200 outline-none text-slate-400">
 						<option value="Bitcoin">BTC</option>
 						<option value="Bitcoin">USD</option>
 						<option value="Bitcoin">EUR</option>
