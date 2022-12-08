@@ -5,7 +5,7 @@ import MenuItem from "./MenuItem";
 function Navbar() {
 	return (
 		<nav
-			className={`flex md:justify-start z-10 sticky w-full min-w-400 justify-around md:top-0 bg-white shadow md:flex-col md:w-60 rounded-r-md md:h-screen box-border`}
+			className={`flex md:justify-start z-10 sticky w-full min-w-400 justify-around md:top-0 bg-white shadow md:flex-col md:w-60 rounded-t-md md:h-screen box-border`}
 		>
 			<MenuItem categorie="Dashboard" />
 			<MenuItem categorie="Wallet" />
