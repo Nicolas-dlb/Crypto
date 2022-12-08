@@ -10,6 +10,7 @@ function Exchange() {
 					<input
 						onChange={(e) => setInput(e.target.value)}
 						type="number"
+						min="0"
 						className="bg-transparent w-full outline-0"
 					/>
 					<select className="rounded-md">
