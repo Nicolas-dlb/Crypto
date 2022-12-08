@@ -8,4 +8,13 @@ module.exports = {
 		domains: ["assets.coingecko.com"],
 		minimumCacheTTL: 2000,
 	},
+	async redirects() {
+		return [
+			{
+				source: "/",
+				destination: "/dashboard",
+				permanent: true,
+			},
+		];
+	},
 };
