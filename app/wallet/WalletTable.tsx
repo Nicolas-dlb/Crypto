@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { fetchCryptos } from "../../utils";
-import Card from "./Card";
+import React, { useState } from "react";
+import Cell from "./Cell";
 
 function WalletTable() {
 	const [wallet, setWallet] = useState({
@@ -25,7 +24,7 @@ function WalletTable() {
 					.map((token: any, i: number) => {
 						const name = token[0];
 						const amount = token[1];
-						return <Card key={i} name={name} amount={amount} />;
+						return <Cell key={i} name={name} amount={amount} />;
 					})}
 			</div>
 		</div>

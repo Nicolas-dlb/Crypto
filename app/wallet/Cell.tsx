@@ -1,11 +1,11 @@
 import React from "react";
 
-interface CardProps {
+interface CellProps {
 	name: string;
 	amount: number;
 }
 
-function Card({ name, amount }: CardProps) {
+function Cell({ name, amount }: CellProps) {
 	const strUcFirst = (a: any) => `${a}`.charAt(0).toUpperCase() + a.substr(1);
 
 	return (
@@ -23,4 +23,4 @@ function Card({ name, amount }: CardProps) {
 	);
 }
 
-export default Card;
+export default Cell;
