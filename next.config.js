@@ -6,5 +6,6 @@ module.exports = {
 	},
 	images: {
 		domains: ["assets.coingecko.com"],
+		minimumCacheTTL: 2000,
 	},
 };

@@ -10,7 +10,7 @@ function loading() {
 		</div>
 	);
 	return (
-		<div className="h-full w-80 flex justify-center items-center">
+		<div className="h-full w-full flex justify-center items-center">
 			<Spinner />
 		</div>
 	);
