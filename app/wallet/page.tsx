@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import Exchange from "./Exchange";
-import WalletTable from "./WalletTable";
+import Table from "./Table";
 
 function Wallet() {
 	return (
@@ -9,7 +9,7 @@ function Wallet() {
 			<h2 className="text-xl">Exchange</h2>
 			<Exchange />
 			<h2 className="text-xl">Wallet</h2>
-			<WalletTable />
+			<Table />
 		</div>
 	);
 }

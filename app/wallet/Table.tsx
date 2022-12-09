@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Cell from "./Cell";
 
-function WalletTable() {
+function Table() {
 	const [wallet, setWallet] = useState({
 		bitcoin: 1,
 		etheurem: 2,
@@ -31,4 +31,4 @@ function WalletTable() {
 	);
 }
 
-export default WalletTable;
+export default Table;
