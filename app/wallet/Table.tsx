@@ -24,7 +24,7 @@ function Table() {
 					.map((token: any, i: number) => {
 						const name = token[0];
 						const amount = token[1];
-						return <Cell key={i} name={name} amount={amount} />;
+						return <Cell index={i} name={name} amount={amount} />;
 					})}
 			</div>
 		</div>

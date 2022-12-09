@@ -3,13 +3,17 @@ import React from "react";
 interface CellProps {
 	name: string;
 	amount: number;
+	index: number;
 }
 
-function Cell({ name, amount }: CellProps) {
+function Cell({ name, amount, index }: CellProps) {
 	const strUcFirst = (a: any) => `${a}`.charAt(0).toUpperCase() + a.substr(1);
 
 	return (
-		<div className="text-slate-500 h-5 w-full text-sm flex justify-around odd:bg-gray-100 ">
+		<div
+			key={index}
+			className="text-slate-500 h-5 w-full text-sm flex justify-around odd:bg-gray-100 "
+		>
 			<p className="w-20 h-fit flex justify-start">
 				{name && strUcFirst(name)}
 			</p>
