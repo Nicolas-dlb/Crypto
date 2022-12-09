@@ -1,11 +1,9 @@
 import Image from "next/image";
 import React from "react";
 import { Crypto } from "../../typing";
+import { getNumberFixed } from "../../utils";
 
 function card(crypto: Crypto): JSX.Element {
-	function getNumberFixed(v: any, d: number): any {
-		return (Math.floor(v * Math.pow(10, d)) / Math.pow(10, d)).toFixed(d);
-	}
 	const priceChangeColor =
 		crypto?.price_change_percentage_24h > 0 ? "text-rose-500" : "text-teal-500";
 

@@ -7,3 +7,7 @@ export const fetchCryptos = async () => {
 	const cryptos: Crypto[] = await request.json();
 	return cryptos;
 };
+
+export const getNumberFixed = (v: any, d: number): number => {
+	return Number((Math.floor(v * Math.pow(10, d)) / Math.pow(10, d)).toFixed(d));
+};
