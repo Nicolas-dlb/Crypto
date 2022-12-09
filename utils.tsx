@@ -11,3 +11,6 @@ export const fetchCryptos = async () => {
 export const getNumberFixed = (v: any, d: number): number => {
 	return Number((Math.floor(v * Math.pow(10, d)) / Math.pow(10, d)).toFixed(d));
 };
+
+export const stringUppercaseFirst = (a: any) =>
+	`${a}`.charAt(0).toUpperCase() + a.substr(1);

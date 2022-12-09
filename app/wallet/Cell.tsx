@@ -1,4 +1,5 @@
 import React from "react";
+import { stringUppercaseFirst } from "../../utils";
 
 interface CellProps {
 	name: string;
@@ -7,15 +8,13 @@ interface CellProps {
 }
 
 function Cell({ name, amount, index }: CellProps) {
-	const strUcFirst = (a: any) => `${a}`.charAt(0).toUpperCase() + a.substr(1);
-
 	return (
 		<div
 			key={index}
 			className="text-slate-500 h-5 w-full text-sm flex justify-around odd:bg-gray-100 "
 		>
 			<p className="w-20 h-fit flex justify-start">
-				{name && strUcFirst(name)}
+				{name && stringUppercaseFirst(name)}
 			</p>
 			<p className="w-20 h-fit flex  justify-center">
 				{amount > 0 ? amount : <>&nbsp;</>}
