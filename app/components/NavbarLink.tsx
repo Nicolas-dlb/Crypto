@@ -1,12 +1,12 @@
 import Link from "next/link";
 import React from "react";
-import "../styles/globals.css";
+import "../../styles/globals.css";
 
 type MenuItemProps = {
 	categorie: string;
 };
 
-function MenuItem({ categorie }: MenuItemProps) {
+function NavbarLink({ categorie }: MenuItemProps) {
 	return (
 		<Link
 			href={`/${categorie.toLowerCase()}`}
@@ -24,4 +24,4 @@ function MenuItem({ categorie }: MenuItemProps) {
 	);
 }
 
-export default MenuItem;
+export default NavbarLink;
