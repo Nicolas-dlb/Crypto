@@ -1,14 +1,7 @@
 import React from "react";
+import Spinner from "../components/Spinner";
 
 function loading() {
-	const Spinner = () => (
-		<div className="lds-ring">
-			<div></div>
-			<div></div>
-			<div></div>
-			<div></div>
-		</div>
-	);
 	return (
 		<div className="h-full w-full flex justify-center items-center">
 			<Spinner />
