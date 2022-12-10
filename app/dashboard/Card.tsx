@@ -8,10 +8,7 @@ function card(crypto: Crypto): JSX.Element {
 		crypto?.price_change_percentage_24h > 0 ? "text-teal-500" : "text-rose-500";
 
 	return (
-		<div
-			key={crypto.id}
-			className="bg-slate-100 flex items-center rounded-md m-2 p-3 text-center  justify-between"
-		>
+		<div className="bg-slate-100 flex items-center rounded-md m-2 p-3 text-center  justify-between">
 			<Image
 				src={crypto?.image}
 				className="h-fit"

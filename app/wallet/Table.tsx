@@ -22,7 +22,7 @@ function Table() {
 				{Object.entries(wallet)
 					.concat(Array.from(Array(20).fill(["", ""])))
 					.map((token: any, i: number) => {
-						return <Cell index={i} name={token[0]} amount={token[1]} />;
+						return <Cell key={i} name={token[0]} amount={token[1]} />;
 					})}
 			</div>
 		</div>
