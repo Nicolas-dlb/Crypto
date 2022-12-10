@@ -5,7 +5,7 @@ import { getNumberFixed } from "../../utils";
 
 function card(crypto: Crypto): JSX.Element {
 	const priceChangeColor =
-		crypto?.price_change_percentage_24h > 0 ? "text-rose-500" : "text-teal-500";
+		crypto?.price_change_percentage_24h > 0 ? "text-teal-500" : "text-rose-500";
 
 	return (
 		<div
