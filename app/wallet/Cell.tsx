@@ -13,15 +13,11 @@ function Cell({ name, amount, index }: CellProps) {
 			key={index}
 			className="text-slate-500 h-5 w-full text-sm flex justify-around odd:bg-gray-100 "
 		>
-			<p className="w-20 h-fit flex justify-start">
-				{name && stringUppercaseFirst(name)}
+			<p className="w-20 h-5 flex justify-start">
+				{stringUppercaseFirst(name)}
 			</p>
-			<p className="w-20 h-fit flex  justify-center">
-				{amount > 0 ? amount : <>&nbsp;</>}
-			</p>
-			<p className="w-20 h-fit flex justify-end">
-				{amount > 0 ? amount : <>&nbsp;</>}
-			</p>
+			<p className="w-20 h-5 flex  justify-center">{amount}</p>
+			<p className="w-20 h-5 flex justify-end">{amount}</p>
 		</div>
 	);
 }
