@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { isNumberKey } from "../../utils";
 
 function Exchange() {
-	const [input, setInput] = useState("");
+	const [input, setInput] = useState(0);
 
 	return (
 		<div className="bg-slate-100 h-40 flex-col flex justify-between rounded-md p-4">
@@ -11,13 +11,13 @@ function Exchange() {
 				<div className="bg-white rounded-md flex justify-between pl-2 w-full">
 					<input
 						onKeyPress={isNumberKey}
-						onChange={(e) => setInput(e.target.value)}
+						onChange={(e) => setInput(Number(e.target.value))}
 						type="number"
 						min="0"
 						pattern="[0-9\.]+"
 						step="0.01"
 						placeholder="Enter an amount"
-						className="bg-transparent w-full outline-none appearance-none"
+						className="bg-transparent w-full outline-none"
 					/>
 					<select className="rounded-md outline-none">
 						<option value="Bitcoin">BTC</option>
