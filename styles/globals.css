@@ -9,14 +9,6 @@
 	}
 }
 
-@layer base {
-	input[type="number"]::-webkit-inner-spin-button,
-	input[type="number"]::-webkit-outer-spin-button {
-		-webkit-appearance: none;
-		margin: 0;
-	}
-}
-
 /* Spinner css for perfomance purpose */
 .lds-ring {
 	display: inline-block;
