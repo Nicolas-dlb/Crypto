@@ -1,25 +1,17 @@
-import React, { KeyboardEvent, useState } from "react";
+import React, { useState } from "react";
+import { isNumberKey } from "../../utils";
 
 function Exchange() {
 	const [input, setInput] = useState("");
-	function isNumberKey(evt: KeyboardEvent<HTMLInputElement>): boolean {
-		var charCode = evt.which ? evt.which : evt.keyCode;
-		if (charCode > 31 && (charCode < 48 || charCode > 57)) return false;
-		return true;
-	}
+
 	return (
 		<div className="bg-slate-100 h-40 flex-col flex justify-between rounded-md p-4">
 			<div className="text-start">
 				<h3 className="text-sm text-slate-600">Swap</h3>
 				<div className="bg-white rounded-md flex justify-between w-full">
 					<input
-						onKeyPress={(e) => isNumberKey(e)}
-						onChange={(e) => {
-							// const numberPattern = /[0-9\/]+/;
-							// if (numberPattern.test(e.key))
-							console.log(e);
-							setInput(e.target.value);
-						}}
+						onKeyPress={isNumberKey}
+						onChange={(e) => setInput(e.target.value)}
 						type="number"
 						min="0"
 						pattern="[0-9\.]+"

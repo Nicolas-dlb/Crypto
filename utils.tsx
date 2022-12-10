@@ -1,3 +1,4 @@
+import { KeyboardEvent } from "react";
 import { Crypto } from "./typing";
 
 export const fetchCryptos = async () => {
@@ -14,3 +15,9 @@ export const getNumberFixed = (v: any, d: number): number => {
 
 export const stringUppercaseFirst = (a: any) =>
 	`${a}`.charAt(0).toUpperCase() + a.substr(1);
+
+export const isNumberKey = (evt: KeyboardEvent<HTMLInputElement>) => {
+	if (evt.which < 48 || evt.which > 57) {
+		evt.preventDefault();
+	}
+};
