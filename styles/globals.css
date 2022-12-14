@@ -45,9 +45,3 @@
 		transform: rotate(360deg);
 	}
 }
-
-@media only screen and (max-width: 768px) {
-	.custom-height-dashboard {
-		height: 93vh !important;
-	}
-}
