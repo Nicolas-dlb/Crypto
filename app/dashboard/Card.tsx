@@ -3,7 +3,7 @@ import React from "react";
 import { Crypto } from "../../typing";
 import { getNumberFixed } from "../../utils";
 
-function card(crypto: Crypto): JSX.Element {
+function Card(crypto: Crypto) {
 	const priceChangeColor =
 		crypto?.price_change_percentage_24h > 0 ? "text-teal-500" : "text-rose-500";
 
@@ -12,6 +12,7 @@ function card(crypto: Crypto): JSX.Element {
 			<Image
 				src={crypto?.image}
 				className="h-fit"
+				priority={true}
 				width="20"
 				height="20"
 				alt=""
@@ -32,4 +33,4 @@ function card(crypto: Crypto): JSX.Element {
 	);
 }
 
-export default card;
+export default Card;
