@@ -1,15 +1,11 @@
-import React, { useState } from "react";
+"use client";
+import React from "react";
+import { useSelector } from "react-redux";
+import { selectWallet } from "../../redux/reducers/walletSlice";
 import Cell from "./Cell";
 
 function Table() {
-	const [wallet, setWallet] = useState({
-		bitcoin: 1,
-		etheurem: 2,
-		ripple: 23,
-		dogecoin: 1,
-		tether: 2,
-		solana: 7,
-	});
+	const wallet = useSelector(selectWallet);
 
 	return (
 		<div className="bg-slate-100 rounded-md flex-col flex h-80">
