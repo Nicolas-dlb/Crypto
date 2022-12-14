@@ -1,4 +1,6 @@
 /** @type {import('tailwindcss').Config} */
+const { fontFamily } = require("tailwindcss/defaultTheme");
+
 module.exports = {
 	mode: "jit",
 	content: [
@@ -9,6 +11,9 @@ module.exports = {
 	theme: {
 		extend: {
 			backgroundColor: ["even", "odd"],
+			fontFamily: {
+				sans: ["var(--font-inter)", ...fontFamily.sans],
+			},
 		},
 	},
 	plugins: [],

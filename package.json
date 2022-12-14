@@ -7,6 +7,7 @@
 		"test": "jest --watch"
 	},
 	"dependencies": {
+		"@next/font": "^13.0.6",
 		"@reduxjs/toolkit": "^1.9.1",
 		"next": "latest",
 		"react": "18.2.0",
