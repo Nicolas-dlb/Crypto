@@ -6,7 +6,7 @@ module.exports = {
 	},
 	images: {
 		domains: ["assets.coingecko.com"],
-		minimumCacheTTL: 2000,
+		minimumCacheTTL: 200,
 	},
 	async redirects() {
 		return [
