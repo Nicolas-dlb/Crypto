@@ -1,9 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import walletReducer from "./reducers/walletSlice";
+import marketReducer from "./reducers/marketSlice";
 
 export const store = configureStore({
 	reducer: {
 		wallet: walletReducer,
+		market: marketReducer,
 	},
 });
 

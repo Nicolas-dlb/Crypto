@@ -1,4 +1,5 @@
 import Navbar from "./Navbar";
+import ReduxProvider from "./providers/ReduxProvider";
 
 export default function RootLayout({
 	children,
@@ -10,8 +11,10 @@ export default function RootLayout({
 			<head />
 
 			<body className="bg-slate-300 text-sm overflow-hidden flex h-screen box-border m-w-350 justify-between md:justify-start flex-col-reverse md:flex-row">
-				<Navbar />
-				{children}
+				<ReduxProvider>
+					<Navbar />
+					{children}
+				</ReduxProvider>
 			</body>
 		</html>
 	);
