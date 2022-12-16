@@ -22,7 +22,7 @@ export const stringUppercaseFirst = (a: any) =>
 
 export const isNumberKey = (evt: KeyboardEvent<HTMLInputElement>) => {
 	const BIRTHNUMBER_ALLOWED_CHARS_REGEXP = /[0-9\/]+/;
-	if (evt.key !== ",") {
+	if (evt.key !== ".") {
 		if (!BIRTHNUMBER_ALLOWED_CHARS_REGEXP.test(evt.key)) {
 			evt.preventDefault();
 		}
