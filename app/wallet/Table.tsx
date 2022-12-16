@@ -16,7 +16,7 @@ function Table() {
 			</div>
 			<div className="flex-col overflow-scroll rounded-md flex items-between justify-start h-full bg-white ">
 				{Object.entries(wallet)
-					.concat(Array.from(Array(20).fill(["", ""])))
+					.concat(Array.from(Array(20).fill(["", null])))
 					.map((token: any, i: number) => {
 						return <Cell key={i} name={token[0]} amount={token[1]} />;
 					})}
