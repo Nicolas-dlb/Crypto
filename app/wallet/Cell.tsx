@@ -30,7 +30,8 @@ function Cell({ name, amount }: CellProps) {
 				{typeof amount == "number" ? amount.toFixed(5) : amount}
 			</p>
 			<p className="w-24 h-5 flex justify-end">
-				{amount && numberWithSpaces(getNumberFixed(value || "", 2)) + " $"}
+				{amount != null &&
+					numberWithSpaces(getNumberFixed(value || "", 2)) + " $"}
 			</p>
 		</div>
 	);
