@@ -1,5 +1,5 @@
 /** @type {import('tailwindcss').Config} */
-const { fontFamily } = require("tailwindcss/defaultTheme");
+const { fontFamily, screens } = require("tailwindcss/defaultTheme");
 
 module.exports = {
 	mode: "jit",
@@ -14,6 +14,11 @@ module.exports = {
 			fontFamily: {
 				sans: ["var(--font-inter)", ...fontFamily.sans],
 			},
+			screens: {
+				xs: {'max': "315px"},
+				...screens,
+			},
+			
 		},
 	},
 	plugins: [],

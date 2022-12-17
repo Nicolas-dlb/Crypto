@@ -22,14 +22,14 @@ function Cell({ name, amount }: CellProps) {
 	const value = token?.current_price * amount;
 
 	return (
-		<div className="text-slate-500 h-5 pl-3 pr-3 text-sm flex justify-around odd:bg-gray-100 ">
-			<p className="w-24 flex flex-none overflow-visible justify-start">
+		<div className="text-slate-500 h-5 px-3 flex justify-around odd:bg-gray-100 ">
+			<p className="w-24 xs:w-20 flex flex-none overflow-hidden text-ellipsis  justify-start">
 				{stringUppercaseFirst(name)}
 			</p>
-			<p className="w-24 h-5 flex justify-center">
+			<p className="w-24 xs:w-20 h-5 flex xs:justify-end justify-center">
 				{typeof amount == "number" ? amount.toFixed(5) : amount}
 			</p>
-			<p className="w-24 h-5 flex justify-end">
+			<p className="w-24 h-5 flex xs:hidden justify-end">
 				{amount != null &&
 					numberWithSpaces(getNumberFixed(value || "", 2)) + " $"}
 			</p>

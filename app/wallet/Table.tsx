@@ -8,11 +8,13 @@ function Table() {
 	const wallet = useSelector(selectWallet);
 
 	return (
-		<div className="bg-slate-100 rounded-md flex-col flex h-80">
-			<div className="flex justify-around w-full h-fit border-b border-slate-300">
-				<p className="w-20 h-fit flex  justify-start">Token</p>
-				<p className="w-20 h-fit flex  justify-center">amount</p>
-				<p className="w-20 h-fit flex  justify-end">value</p>
+		<div className="bg-slate-100 rounded-md flex-col min-w-[140px] flex h-80">
+			<div className="flex justify-around w-full h-fit border-b px-3 border-slate-300">
+				<p className="w-24 xs:w-20 flex-none h-fit flex justify-start">Token</p>
+				<p className="w-24 xs:w-20 h-fit flex xs:justify-end justify-center">
+					amount
+				</p>
+				<p className="w-24 h-fit xs:hidden flex justify-end">value</p>
 			</div>
 			<div className="flex-col overflow-scroll rounded-md flex items-between justify-start h-full bg-white ">
 				{Object.entries(wallet)

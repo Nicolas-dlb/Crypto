@@ -5,7 +5,9 @@ interface TitleProps {
 }
 
 function Title({ value }: TitleProps) {
-	return <h2 className="text-lg">{value}</h2>;
+	return (
+		<h2 className="text-base text-gray-600 font-semibold my-2">{value}</h2>
+	);
 }
 
 export default Title;

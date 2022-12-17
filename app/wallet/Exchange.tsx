@@ -64,7 +64,7 @@ function Exchange() {
 		<div className="bg-slate-100 h-1/3 flex-col flex justify-between rounded-md p-4">
 			<div className="text-start">
 				<div className="flex w-[150px] justify-between">
-					<h3 className="text-sm mb-2 text-slate-600">Swap</h3>
+					<h3 className="text-sm xs:text-xs mb-2 text-slate-600">Swap</h3>
 					<p className="text-rose-700 text-[12.5px]">
 						{error && "Insufisant wallet"}
 					</p>
@@ -97,8 +97,8 @@ function Exchange() {
 						tokenToSellName={tokenToSellName}
 					/>
 				</div>
-				<h3 className="text-sm my-1 text-slate-600">For</h3>
-				<div className="mt-2 md:mt-0 pl-2 bg-slate-200 h-8 flex justify-between w-full rounded-md">
+				<h3 className="text-sm my-1 xs:text-xs text-slate-600">For</h3>
+				<div className="mt-2 pl-2 bg-slate-200 h-8 flex justify-between w-full rounded-md">
 					<p className="w-full items-center flex text-slate-400">
 						{amountToBuy > 0 && amountToBuy.toFixed(5)}
 					</p>
