@@ -5,10 +5,7 @@ import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import { selectMarket } from "../../redux/reducers/marketSlice";
 import { useSelector } from "react-redux";
 import { Crypto } from "../../typing";
-
-function classNames(...classes: string[]) {
-	return classes.filter(Boolean).join(" ");
-}
+import { classNames } from "../../utils";
 
 export default function Dropdown({
 	state,
