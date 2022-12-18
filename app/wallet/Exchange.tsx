@@ -35,7 +35,7 @@ function Exchange() {
 	);
 	let amountToBuy = price / (tokenToBuy?.current_price as number);
 
-	const swapTokens = (e: MouseEvent) => {
+	const swapTokens = (e: MouseEvent): void => {
 		if (amountToSell) {
 			if (amountToSell <= wallet[tokenToSellName]) {
 				dispatch(
