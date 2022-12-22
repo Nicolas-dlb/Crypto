@@ -3,7 +3,7 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { ChangeEvent, useState } from "react";
-import { auth } from "../../firebaseConfig";
+import { auth } from "../../../firebaseConfig";
 import { getBackgroundColorWithStates, getSpanColorWithStates } from "./styles";
 
 function page() {

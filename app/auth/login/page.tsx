@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { signInAnonymously } from "firebase/auth";
-import { auth } from "../../firebaseConfig";
+import { auth } from "../../../firebaseConfig";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
