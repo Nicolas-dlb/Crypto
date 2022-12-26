@@ -8,7 +8,7 @@ function Card(crypto: Crypto) {
 		crypto?.price_change_percentage_24h > 0 ? "text-teal-500" : "text-rose-500";
 
 	return (
-		<div className="bg-slate-100 flex items-center rounded-md m-2 p-3 text-center  justify-between">
+		<div className="bg-slate-100 shadow flex items-center rounded-md m-2 p-3 text-center text-slate-700 font-medium justify-between">
 			<Image
 				src={crypto?.image}
 				className="h-fit"
