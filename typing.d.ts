@@ -30,3 +30,8 @@ export type Crypto = {
 	};
 	last_updated: string;
 };
+
+export interface SVGProps {
+	fill: string;
+	className?: string;
+}

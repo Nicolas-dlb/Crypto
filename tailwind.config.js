@@ -15,7 +15,7 @@ module.exports = {
 				sans: ["var(--font-inter)", ...fontFamily.sans],
 			},
 			screens: {
-				xs: {'max': "315px"},
+				mobile: {'max': "768px"},
 				...screens,
 			},
 			
