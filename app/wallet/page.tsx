@@ -5,7 +5,7 @@ import Table from "./Table";
 
 function Wallet() {
 	return (
-		<div className="m-2 xs:text-xs">
+		<div className="m-2">
 			<Title value="Exchange" />
 			<Exchange />
 			<Title value="Wallet" />

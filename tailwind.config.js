@@ -15,10 +15,10 @@ module.exports = {
 				sans: ["var(--font-inter)", ...fontFamily.sans],
 			},
 			screens: {
-				mobile: {'max': "768px"},
+				xs: { max: "315px" },
+				mobile: { max: "768px" },
 				...screens,
 			},
-			
 		},
 	},
 	plugins: [],
