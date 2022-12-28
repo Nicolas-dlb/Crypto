@@ -25,9 +25,7 @@ function NavbarLink({ categorie }: MenuItemProps) {
 				fill={active ? "white" : "#505764"}
 				className="md:m-2 md:fill-[#505764] mobile:group-hover:fill-white"
 			/>
-			<p className="font-semibold text-xs hidden md:inline-block">
-				{categorie}
-			</p>
+			<p className="font-medium text-xs hidden md:inline-block">{categorie}</p>
 		</Link>
 	);
 }
