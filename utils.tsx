@@ -1,5 +1,6 @@
 import { KeyboardEvent } from "react";
 import { Crypto } from "./typing";
+import { inputContainer } from "./app/styles/auth";
 
 export const fetchCryptos = async () => {
 	try {
@@ -40,3 +41,5 @@ export const numberWithSpaces = (x: any) => {
 export const classNames = (...classes: string[]) => {
 	return classes.filter(Boolean).join(" ");
 };
+
+export const validEmailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;

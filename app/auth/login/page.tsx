@@ -1,14 +1,46 @@
 "use client";
-import React from "react";
-import { signInAnonymously } from "firebase/auth";
+import React, { ChangeEvent, useState } from "react";
+import { signInAnonymously, signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../../firebaseConfig";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import {
+	button,
+	buttonsGroup,
+	input,
+	label,
+	modal,
+	screen,
+	title,
+} from "../../styles/auth";
+import { getInputStyleWithStates, getSpanStyleWithStates } from "../getStyles";
+import { validEmailRegex } from "../../../utils";
 
 function login() {
 	const router = useRouter();
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
+
+	const isValidEmail = validEmailRegex.test(email);
+	const isValidPassword = password.split("").length >= 6;
+
+	const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) =>
+		setEmail(e.target.value);
+	const handlePasswordChange = (e: ChangeEvent<HTMLInputElement>) =>
+		setPassword(e.target.value);
 
 	const signIn = () => {
+		signInWithEmailAndPassword(auth, email, password)
+			.then((data) => {
+				router.push("/dashboard");
+			})
+			.catch((error) => {
+				const errorCode = error.code;
+				const errorMessage = error.message;
+				// ...
+			});
+	};
+	const signInDemoAccount = () => {
 		signInAnonymously(auth)
 			.then((data) => {
 				router.push("/dashboard");
@@ -21,47 +53,51 @@ function login() {
 	};
 
 	return (
-		<div className="absolute w-screen h-screen flex justify-center items-center left-0 z-20 bg-slate-300">
-			<div className="bg-slate-100 rounded-md w-9/12 max-w-sm p-3 gap-2 flex flex-col justify-between items-center">
-				<p className="text-base font-semibold text-slate-500">Welcome</p>
-				<label htmlFor="email" className="text-start w-full text-slate-500">
+		<div className={screen}>
+			<div className={modal}>
+				<p className={title}>Welcome</p>
+				<label htmlFor="email" className={label}>
 					Email
 				</label>
-				<input
-					type="text"
-					name="email"
-					placeholder="Enter your email"
-					className="outline-none w-full rounded-md p-2"
-					autoComplete="off"
-				/>
-				<label htmlFor="password" className="text-start w-full text-slate-500">
+				<div className={getInputStyleWithStates(email, isValidEmail)}>
+					<span className={getSpanStyleWithStates(email, isValidEmail)} />
+					<input
+						onChange={handleEmailChange}
+						type="email"
+						spellCheck={false}
+						name="email"
+						autoComplete="off"
+						placeholder="Enter your email"
+						className={input}
+					/>
+				</div>
+				<label htmlFor="password" className={label}>
 					Password
 				</label>
-				<input
-					type="password"
-					name="password"
-					autoComplete="new-password"
-					placeholder="Enter your password"
-					className="outline-none w-full rounded-md p-2"
-				/>
+				<div className={getInputStyleWithStates(password, isValidPassword)}>
+					<span className={getSpanStyleWithStates(password, isValidPassword)} />
 
-				<div className="flex w-full h-24 md:h-fit md:my-3 flex-col md:flex-row items-center justify-around">
-					<button
-						onClick={signIn}
-						className="bg-slate-200 rounded-md text-slate-500 p-2 flex-none w-full md:w-1/3"
-					>
+					<input
+						onChange={handlePasswordChange}
+						type="new-password"
+						spellCheck={false}
+						name="password"
+						autoComplete="off"
+						placeholder="Enter your password"
+						className={input}
+					/>
+				</div>
+				<div className={buttonsGroup}>
+					<button onClick={signIn} className={button}>
 						login
 					</button>
-					<button
-						onClick={signIn}
-						className="bg-slate-200 rounded-md text-slate-500 p-2 flex-none flex items-center justify-center gap-2 w-full md:w-1/3"
-					>
+					<button onClick={signInDemoAccount} className={button}>
 						Demo account
 					</button>
 				</div>
-				<p className="text-xs text-slate-500">
+				<p className="text-xs text-slate-500 font-medium">
 					Not registered yet ?{" "}
-					<Link href="/signup" className="text-slate-600">
+					<Link href="/auth/signup" className="text-slate-600 underline">
 						Sign up
 					</Link>
 				</p>
