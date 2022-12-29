@@ -30,7 +30,7 @@ export const getSpanStyleWithStates = (
 		property,
 		isValidProperty
 	);
-	const width = property ? "w-4" : "w-0";
+	const width = property ? "w-4 h-full" : "w-0";
 
 	return `${width} transition-all ${backgroundColor} rounded`;
 };

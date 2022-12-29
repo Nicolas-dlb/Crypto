@@ -10,7 +10,8 @@ export const title = "text-base font-semibold text-slate-500 ";
 
 export const label = "text-start w-full font-medium text-slate-500 ";
 
-export const inputContainer = "flex w-full rounded-md transition-all ";
+export const inputContainer =
+	"flex w-full h-9 rounded-md transition-all items-center pr-2 ";
 
 export const buttonsGroup =
 	"flex w-full h-24 md:h-fit md:my-3 flex-col md:flex-row items-center justify-around ";
@@ -18,4 +19,4 @@ export const buttonsGroup =
 export const button = btn + " md:w-1/3 ";
 
 export const input =
-	"outline-none w-full bg-transparent transition-all rounded-md p-2 ";
+	"outline-none w-full bg-transparent transition-all rounded-md p-2 pr-0";
