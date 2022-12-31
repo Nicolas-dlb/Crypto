@@ -25,7 +25,7 @@ function Card(crypto: Crypto) {
 				<p>{getNumberFixed(crypto?.current_price, 2)}$</p>
 			</div>
 			<div
-				className={`${priceChangeColor} w-1/6 m-0 p-0 items-center flex h-fit`}
+				className={`${priceChangeColor} w-1/6 m-0 p-0 items-center flex h-fit xs:hidden`}
 			>
 				<p> {getNumberFixed(crypto?.price_change_percentage_24h, 2)}%</p>
 			</div>
