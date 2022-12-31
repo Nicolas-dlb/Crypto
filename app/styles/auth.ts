@@ -16,7 +16,7 @@ export const inputContainer =
 export const buttonsGroup =
 	"flex w-full h-24 md:h-fit md:my-3 flex-col md:flex-row items-center justify-around ";
 
-export const button = btn + " md:w-1/3 ";
+export const button = btn + " bg-slate-200 hover:bg-slate-300 md:w-1/3 ";
 
 export const input =
 	"outline-none w-full bg-transparent transition-all rounded-md p-2 pr-0";
