@@ -1,6 +1,7 @@
 import Navbar from "./Navbar";
 import ReduxProvider from "./providers/ReduxProvider";
 import { Inter } from "@next/font/google";
+import setupLocatorUI from "@locator/runtime";
 
 const inter = Inter({
 	subsets: ["latin"],
@@ -11,6 +12,9 @@ export default function RootLayout({
 }: {
 	children: React.ReactNode;
 }) {
+	if (process.env.NODE_ENV === "development") {
+		setupLocatorUI();
+	}
 	return (
 		<html>
 			<head />
