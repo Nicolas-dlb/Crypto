@@ -8,22 +8,19 @@ import {
 	button,
 	buttonsGroup,
 	input,
+	inputContainer,
 	label,
 	modal,
 	screen,
 	title,
 } from "../../styles/auth";
-import { getInputStyleWithStates, getSpanStyleWithStates } from "../getStyles";
-import { validEmailRegex } from "../../../utils";
 
 function login() {
 	const router = useRouter();
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [showPassword, setShowPassword] = useState(false);
-
-	const isValidEmail = validEmailRegex.test(email);
-	const isValidPassword = password.split("").length >= 6;
+	const [error, setError] = useState(false);
 
 	const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) =>
 		setEmail(e.target.value);
@@ -33,12 +30,13 @@ function login() {
 	const signIn = () => {
 		signInWithEmailAndPassword(auth, email, password)
 			.then((data) => {
+				error && setError(false);
 				router.push("/dashboard");
 			})
 			.catch((error) => {
 				const errorCode = error.code;
 				const errorMessage = error.message;
-				// ...
+				setError(true);
 			});
 	};
 	const signInDemoAccount = () => {
@@ -55,6 +53,8 @@ function login() {
 
 	const toggleShowPassword = () => setShowPassword(!showPassword);
 
+	const backgroundColor = error ? "bg-rose-100" : "bg-white";
+
 	return (
 		<div className={screen}>
 			<div className={modal}>
@@ -62,8 +62,7 @@ function login() {
 				<label htmlFor="email" className={label}>
 					Email
 				</label>
-				<div className={getInputStyleWithStates(email, isValidEmail)}>
-					<span className={getSpanStyleWithStates(email, isValidEmail)} />
+				<div className={inputContainer + backgroundColor}>
 					<input
 						onChange={handleEmailChange}
 						type="email"
@@ -77,9 +76,7 @@ function login() {
 				<label htmlFor="password" className={label}>
 					Password
 				</label>
-				<div className={getInputStyleWithStates(password, isValidPassword)}>
-					<span className={getSpanStyleWithStates(password, isValidPassword)} />
-
+				<div className={inputContainer + backgroundColor}>
 					<input
 						onChange={handlePasswordChange}
 						type={showPassword ? "text" : "password"}
