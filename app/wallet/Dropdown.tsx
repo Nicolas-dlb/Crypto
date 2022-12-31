@@ -18,6 +18,7 @@ export default function Dropdown({
 	setState,
 	options,
 	tokenToSellName,
+	type,
 }: any) {
 	const market = useSelector(selectMarket);
 	const crypto = market.find(
@@ -49,7 +50,11 @@ export default function Dropdown({
 	return (
 		<Menu as="div" className={container}>
 			<Menu.Button className={button}>
-				{isMarketDropdown && state === tokenToSellName
+				{market.length < 1
+					? type === "Buy"
+						? "ETH"
+						: "BTC"
+					: isMarketDropdown && state === tokenToSellName
 					? options
 							.filter((crypto: Crypto) => crypto.name.toLowerCase() != state)[0]
 							.symbol.toUpperCase()

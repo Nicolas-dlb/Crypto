@@ -97,6 +97,7 @@ function Exchange() {
 					setState={setTokenToSellName}
 					options={wallet}
 					tokenToSellName={tokenToSellName}
+					type="Sell"
 				/>
 			</div>
 			<Label className="my-2">For</Label>
@@ -109,6 +110,7 @@ function Exchange() {
 					setState={setTokenToBuyName}
 					options={market}
 					tokenToSellName={tokenToSellName}
+					type="Buy"
 				/>
 			</div>
 
