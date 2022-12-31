@@ -1,5 +1,5 @@
 "use client";
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, KeyboardEvent, useState } from "react";
 import { signInAnonymously, signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../../firebaseConfig";
 import { useRouter } from "next/navigation";
@@ -50,7 +50,8 @@ function login() {
 				// ...
 			});
 	};
-
+	const signInWithEnterKey = (e: KeyboardEvent<HTMLInputElement>) =>
+		e.key == "Enter" && signIn();
 	const toggleShowPassword = () => setShowPassword(!showPassword);
 
 	const backgroundColor = error ? "bg-rose-100" : "bg-white";
@@ -64,6 +65,7 @@ function login() {
 				</label>
 				<div className={inputContainer + backgroundColor}>
 					<input
+						onKeyPress={signInWithEnterKey}
 						onChange={handleEmailChange}
 						type="email"
 						spellCheck={false}
@@ -78,6 +80,7 @@ function login() {
 				</label>
 				<div className={inputContainer + backgroundColor}>
 					<input
+						onKeyPress={signInWithEnterKey}
 						onChange={handlePasswordChange}
 						type={showPassword ? "text" : "password"}
 						spellCheck={false}
