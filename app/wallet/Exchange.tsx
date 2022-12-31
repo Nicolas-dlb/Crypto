@@ -1,5 +1,11 @@
 "use client";
-import React, { MouseEvent, useEffect, useRef, useState } from "react";
+import React, {
+	KeyboardEvent,
+	MouseEvent,
+	useEffect,
+	useRef,
+	useState,
+} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getMarket } from "../../redux/reducers/marketSlice";
 import { selectWallet, swapToken } from "../../redux/reducers/walletSlice";
@@ -10,6 +16,8 @@ import { button } from "../styles/globals";
 import { input } from "../styles/exchange";
 import Dropdown from "./Dropdown";
 import Error from "../components/Error";
+import { auth, db } from "../../firebaseConfig";
+import { doc, updateDoc } from "firebase/firestore";
 
 function Exchange() {
 	const [amountToSell, setAmountToSell] = useState<number | string>("");
@@ -39,17 +47,21 @@ function Exchange() {
 			? "0.01"
 			: "0.1";
 
-	const swapTokens = (e: MouseEvent): void => {
+	const swapTokens = (
+		e: MouseEvent | KeyboardEvent<HTMLInputElement>
+	): void => {
 		if (amountToSell) {
 			if (amountToSell <= wallet[tokenToSellName]) {
-				dispatch(
-					swapToken({
-						tokenToSell: tokenToSellName,
-						amountToSell: amountToSell,
-						tokenToBuy: tokenToBuyName,
-						amountToBuy: amountToBuy,
-					})
-				);
+				const userRef = doc(db, "users", auth.currentUser!.uid);
+				updateDoc(userRef, {
+					wallet: {
+						...wallet,
+						[tokenToSellName]:
+							wallet[tokenToSellName] - parseFloat(amountToSell as string),
+						[tokenToBuyName]:
+							wallet[tokenToBuyName] + amountToBuy || amountToBuy,
+					},
+				});
 				setAmountToSell("");
 			} else {
 				setInsufficientTokens(true);
@@ -81,7 +93,10 @@ function Exchange() {
 			</div>
 			<div className="pl-2 h-8 flex justify-between w-full rounded-md bg-white">
 				<input
-					onKeyPress={isNumberKey}
+					onKeyPress={(e) => {
+						isNumberKey(e);
+						swapTokens(e);
+					}}
 					onChange={(e) => setAmountToSell(e.target.value)}
 					ref={inputRef}
 					type="number"

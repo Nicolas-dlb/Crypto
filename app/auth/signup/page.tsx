@@ -3,7 +3,7 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { ChangeEvent, useState } from "react";
-import { auth } from "../../../firebaseConfig";
+import { auth, db } from "../../../firebaseConfig";
 import {
 	button,
 	buttonsGroup,
@@ -15,6 +15,7 @@ import {
 } from "../../styles/auth";
 import { getInputStyleWithStates, getSpanStyleWithStates } from "../getStyles";
 import { validEmailRegex } from "../../../utils";
+import { collection, doc, setDoc } from "firebase/firestore";
 
 function page() {
 	const [email, setEmail] = useState("");
@@ -31,8 +32,14 @@ function page() {
 		setPassword(e.target.value);
 
 	const createUser = () => {
+		const usersRef = collection(db, "users");
+
 		createUserWithEmailAndPassword(auth, email, password)
-			.then((user) => {
+			.then(async (credentials) => {
+				const user = credentials.user;
+				await setDoc(doc(usersRef, user.uid), {
+					wallet: { bitcoin: 1, ethereum: 1, litecoin: 1 },
+				});
 				router.push("/dashboard");
 			})
 			.catch((error) => {
@@ -43,7 +50,7 @@ function page() {
 
 	return (
 		<div className={screen}>
-			<form className={modal}>
+			<div className={modal}>
 				<p className={title}>Sign up</p>
 				<label htmlFor="email" className={label}>
 					Email
@@ -93,7 +100,7 @@ function page() {
 						<p>Login page</p>
 					</Link>
 				</div>
-			</form>
+			</div>
 		</div>
 	);
 }

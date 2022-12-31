@@ -2,6 +2,7 @@ import Navbar from "./Navbar";
 import ReduxProvider from "./providers/ReduxProvider";
 import { Inter } from "@next/font/google";
 import setupLocatorUI from "@locator/runtime";
+import WalletProvider from "./providers/WalletProvider";
 
 const inter = Inter({
 	subsets: ["latin"],
@@ -23,8 +24,10 @@ export default function RootLayout({
 				className={`${inter.variable} antialiased font-sans bg-slate-300 text-sm overflow-hidden flex h-screen box-border m-w-350 justify-between md:justify-start flex-col-reverse md:flex-row`}
 			>
 				<ReduxProvider>
-					<Navbar />
-					{children}
+					<WalletProvider>
+						<Navbar />
+						{children}
+					</WalletProvider>
 				</ReduxProvider>
 			</body>
 		</html>
