@@ -86,7 +86,7 @@ function Exchange() {
 	}, [inputRef.current?.value]);
 
 	return (
-		<div className="bg-slate-100 shadow flex-col flex justify-between rounded-md p-4">
+		<div className="bg-slate-100 shadow flex-col flex justify-between rounded-md p-4 lg:w-11/12">
 			<div className="flex w-[160px] justify-between">
 				<Label className="mb-2">Swap</Label>
 				<Error>{insufficientTokens && "Insufficient tokens"}</Error>
