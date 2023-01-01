@@ -2,11 +2,16 @@ import React from "react";
 
 interface TitleProps {
 	value: string;
+	className?: string;
 }
 
-function Title({ value }: TitleProps) {
+function Title({ value, className }: TitleProps) {
 	return (
-		<h2 className="text-base text-gray-600 font-semibold my-2">{value}</h2>
+		<h2
+			className={`text-base text-gray-600 font-semibold my-2 w-full ${className}`}
+		>
+			{value}
+		</h2>
 	);
 }
 
