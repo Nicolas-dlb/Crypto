@@ -19,7 +19,7 @@ function NavbarLink({ categorie }: MenuItemProps) {
 			href={`/${categorie.toLowerCase()}`}
 			className={`${
 				active ? "text-white bg-slate-400 shadow" : "text-gray-600"
-			} flex flex-col flex-1 md:flex-none p-2 md:flex-row hover:shadow items-center cursor-pointer group hover:bg-slate-400 hover:text-white hover:text-white-500 rounded-md`}
+			} flex flex-col flex-1 md:flex-none p-2 md:flex-row hover:shadow items-center cursor-pointer group hover:bg-slate-400 hover:text-white hover:text-white-500`}
 		>
 			<Icon
 				fill={active ? "white" : "#505764"}
