@@ -63,11 +63,9 @@ function Exchange() {
 					},
 				});
 				setAmountToSell("");
+				setInsufficientTokens(false);
 			} else {
 				setInsufficientTokens(true);
-				setTimeout(() => {
-					setInsufficientTokens(false);
-				}, 2000);
 			}
 		}
 	};
@@ -91,7 +89,11 @@ function Exchange() {
 				<Label className="mb-2">Swap</Label>
 				<Error>{insufficientTokens && "Insufficient tokens"}</Error>
 			</div>
-			<div className="pl-2 h-8 flex justify-between w-full rounded-md bg-white">
+			<div
+				className={`h-8 flex justify-between w-full rounded-md bg-white ${
+					insufficientTokens && "bg-rose-200"
+				}`}
+			>
 				<input
 					onKeyPress={(e) => {
 						isNumberKey(e);
