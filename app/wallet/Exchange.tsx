@@ -95,7 +95,7 @@ function Exchange() {
 				<input
 					onKeyPress={(e) => {
 						isNumberKey(e);
-						swapTokens(e);
+						e.key === "Enter" && swapTokens(e);
 					}}
 					onChange={(e) => setAmountToSell(e.target.value)}
 					ref={inputRef}
