@@ -1,5 +1,5 @@
 export const container =
-	"bg-slate-100 h-1/3 shadow flex-col flex justify-between rounded-md p-4";
+	"bg-slate-100 shadow flex-col flex justify-between rounded-md p-4 lg:w-11/12";
 
 export const labelWithErrorContainer = "flex w-[160px] justify-between";
 

@@ -13,7 +13,12 @@ import { Crypto } from "../../typing";
 import { classNames, fetchCryptos, isNumberKey } from "../../utils";
 import Label from "../components/Label";
 import { button } from "../styles/globals";
-import { input } from "../styles/exchange";
+import {
+	container,
+	input,
+	inputContainer,
+	labelWithErrorContainer,
+} from "../styles/exchange";
 import Dropdown from "./Dropdown";
 import Error from "../components/Error";
 import { auth, db } from "../../firebaseConfig";
@@ -84,15 +89,13 @@ function Exchange() {
 	}, [inputRef.current?.value]);
 
 	return (
-		<div className="bg-slate-100 shadow flex-col flex justify-between rounded-md p-4 lg:w-11/12">
-			<div className="flex w-[160px] justify-between">
+		<div className={container}>
+			<div className={labelWithErrorContainer}>
 				<Label className="mb-2">Swap</Label>
 				<Error>{insufficientTokens && "Insufficient tokens"}</Error>
 			</div>
 			<div
-				className={`h-8 flex justify-between w-full rounded-md bg-white ${
-					insufficientTokens && "bg-rose-200"
-				}`}
+				className={inputContainer + `${insufficientTokens && "bg-rose-200"}`}
 			>
 				<input
 					onKeyPress={(e) => {
