@@ -1,5 +1,5 @@
-import Dashboard from "./DashboardIcon";
+import Market from "./MarketIcon";
 import Wallet from "./WalletIcon";
 import Settings from "./SettingsIcon";
 
-export default { Dashboard, Wallet, Settings };
+export default { Market, Wallet, Settings };

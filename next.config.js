@@ -12,7 +12,7 @@ module.exports = {
 		return [
 			{
 				source: "/",
-				destination: "/dashboard",
+				destination: "/market",
 				permanent: true,
 			},
 		];

@@ -31,7 +31,7 @@ function login() {
 		signInWithEmailAndPassword(auth, email, password)
 			.then((data) => {
 				error && setError(false);
-				router.push("/dashboard");
+				router.push("/market");
 			})
 			.catch((error) => {
 				const errorCode = error.code;
@@ -42,7 +42,7 @@ function login() {
 	const signInDemoAccount = () => {
 		signInAnonymously(auth)
 			.then((data) => {
-				router.push("/dashboard");
+				router.push("/market");
 			})
 			.catch((error) => {
 				const errorCode = error.code;
