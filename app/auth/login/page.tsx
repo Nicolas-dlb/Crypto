@@ -1,7 +1,7 @@
 "use client";
 import React, { ChangeEvent, KeyboardEvent, useState } from "react";
 import { signInAnonymously, signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../../firebaseConfig";
+import { auth, db } from "../../../firebaseConfig";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import {
@@ -14,6 +14,7 @@ import {
 	screen,
 	title,
 } from "../../styles/auth";
+import { collection, doc, setDoc } from "firebase/firestore";
 
 function login() {
 	const router = useRouter();
@@ -41,7 +42,13 @@ function login() {
 	};
 	const signInDemoAccount = () => {
 		signInAnonymously(auth)
-			.then((data) => {
+			.then(async (credentials) => {
+				const usersRef = collection(db, "users");
+				const user = credentials.user;
+				await setDoc(doc(usersRef, user.uid), {
+					wallet: { bitcoin: 1, ethereum: 1, litecoin: 1 },
+					usd: 20000,
+				});
 				router.push("/market");
 			})
 			.catch((error) => {
