@@ -39,8 +39,9 @@ function page() {
 				const user = credentials.user;
 				await setDoc(doc(usersRef, user.uid), {
 					wallet: { bitcoin: 1, ethereum: 1, litecoin: 1 },
+					usd: 20000,
 				});
-				router.push("/dashboard");
+				router.push("/market");
 			})
 			.catch((error) => {
 				const errorCode = error.code;

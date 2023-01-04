@@ -1,10 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 interface walletT {
-	[string: string]: number;
+	wallet: { [string: string]: number };
+	usd: number | null;
 }
 
-const initialState: walletT = {};
+const initialState: walletT = {
+	wallet: {},
+	usd: null,
+};
 
 export const walletSlice = createSlice({
 	name: "wallet",
@@ -15,19 +19,21 @@ export const walletSlice = createSlice({
 			const amountToSell: number = action.payload.amountToSell;
 			const tokenToBuy: string = action.payload.tokenToBuy;
 			const amountToBuy: number = action.payload.amountToBuy;
-			if (state[tokenToBuy]) {
-				state[tokenToSell] -= amountToSell;
-				state[tokenToBuy] += amountToBuy;
+			if (state.wallet[tokenToBuy]) {
+				state.wallet[tokenToSell] -= amountToSell;
+				state.wallet[tokenToBuy] += amountToBuy;
 			} else {
-				state[tokenToBuy] = amountToBuy;
+				state.wallet[tokenToBuy] = amountToBuy;
 			}
 		},
 		getWallet: (state, action) => {
-			return (state = action.payload?.wallet);
+			state.wallet = action.payload?.wallet;
+			state.usd = action.payload?.usd;
 		},
 	},
 });
 
 export const { swapToken, getWallet } = walletSlice.actions;
-export const selectWallet = (state: any) => state.wallet;
+export const selectWallet = (state: any) => state.wallet.wallet;
+export const selectMoney = (state: any) => state.wallet.usd;
 export default walletSlice.reducer;
