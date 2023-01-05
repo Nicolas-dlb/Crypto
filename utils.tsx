@@ -1,6 +1,7 @@
+import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { KeyboardEvent } from "react";
+import { auth, db } from "./firebaseConfig";
 import { Crypto } from "./typing";
-import { inputContainer } from "./app/styles/auth";
 
 export const fetchCryptos = async () => {
 	try {
@@ -43,3 +44,25 @@ export const classNames = (...classes: string[]) => {
 };
 
 export const validEmailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+
+export const updateWallet = async (
+	tokenName: string,
+	amountOfToken: number,
+	value: number
+) => {
+	const userRef = doc(db, "users", auth.currentUser!.uid);
+	const docSnap = await getDoc(userRef);
+	const userData = docSnap.data();
+	const wallet = userData?.wallet;
+	const usd = userData?.usd;
+
+	updateDoc(userRef, {
+		wallet: {
+			...wallet,
+			[tokenName]: wallet![tokenName]
+				? wallet[tokenName] + amountOfToken
+				: amountOfToken,
+		},
+		usd: usd + value,
+	});
+};
