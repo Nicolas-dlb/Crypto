@@ -8,7 +8,7 @@ import React, {
 } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getMarket } from "../../redux/reducers/marketSlice";
-import { selectWallet, swapToken } from "../../redux/reducers/walletSlice";
+import { selectWallet } from "../../redux/reducers/walletSlice";
 import { Crypto } from "../../typing";
 import { classNames, fetchCryptos, isNumberKey } from "../../utils";
 import Label from "../components/Label";
@@ -19,52 +19,78 @@ import {
 	inputContainer,
 	labelWithErrorContainer,
 } from "../styles/exchange";
-import Dropdown from "./Dropdown";
 import Error from "../components/Error";
 import { auth, db } from "../../firebaseConfig";
 import { doc, updateDoc } from "firebase/firestore";
+import Dropdown from "./Dropdown";
 
 function Exchange() {
 	const [amountToSell, setAmountToSell] = useState<number | string>("");
 	const dispatch = useDispatch();
 	const [market, setMarket] = useState<Crypto[]>([]);
-	const [tokenToSellName, setTokenToSellName] = useState("bitcoin");
-	const [tokenToBuyName, setTokenToBuyName] = useState("ethereum");
+	const [tokenToSell, setTokenToSell] = useState<Crypto>();
+	const [tokenToBuy, setTokenToBuy] = useState<Crypto>();
 	const wallet = useSelector(selectWallet);
 	const inputRef = useRef<HTMLInputElement>(null);
 	const [insufficientTokens, setInsufficientTokens] = useState(false);
+	const [price, setPrice] = useState(0);
+	const [step, setStep] = useState("0.1");
+	const [amountToBuy, setAmountToBuy] = useState<number | null>(null);
+	const [buyOptions, setBuyOptions] = useState<Crypto[]>();
 
-	const tokenToSell = market.find(
-		(token) => token.name.toLowerCase() == tokenToSellName
-	) as Crypto;
-	const price = tokenToSell?.current_price * (amountToSell as number);
-	const tokenToBuy = market.find(
-		(token) => token.name.toLowerCase() == tokenToBuyName
-	);
-	let amountToBuy = price / (tokenToBuy?.current_price as number);
+	useEffect(() => {
+		setBuyOptions(market.filter((token) => token.name !== tokenToSell?.name));
+	}, [tokenToSell]);
 
-	const step =
-		wallet[tokenToSellName] < 0.001
-			? "0.00001"
-			: wallet[tokenToSellName] < 0.01
-			? "0.0001"
-			: wallet[tokenToSellName] < 3
-			? "0.01"
-			: "0.1";
+	useEffect(() => {
+		buyOptions && setTokenToBuy(buyOptions[0]);
+	}, [buyOptions]);
+
+	useEffect(() => {
+		if (tokenToSell) {
+			setPrice(tokenToSell!.current_price * (amountToSell as number));
+			setStep(
+				wallet[tokenToSell!.name.toLowerCase()] < 0.001
+					? "0.00001"
+					: wallet[tokenToSell!.name.toLowerCase()] < 0.01
+					? "0.0001"
+					: wallet[tokenToSell!.name.toLowerCase()] < 3
+					? "0.01"
+					: "0.1"
+			);
+		}
+	}, [tokenToSell, wallet, amountToSell, market]);
+
+	useEffect(() => {
+		if (amountToSell) {
+			setAmountToBuy(price / (tokenToBuy?.current_price as number));
+		}
+	}, [tokenToSell, tokenToBuy, price]);
+
+	useEffect(() => {
+		if (tokenToBuy && amountToSell) {
+			setPrice(tokenToSell!.current_price * (amountToSell as number));
+			setAmountToBuy(price / (tokenToBuy?.current_price as number));
+		} else if (tokenToBuy && !amountToSell) {
+			setAmountToBuy(null);
+		}
+	}, [amountToSell, tokenToBuy, tokenToSell, market]);
 
 	const swapTokens = (
 		e: MouseEvent | KeyboardEvent<HTMLInputElement>
 	): void => {
 		if (amountToSell) {
-			if (amountToSell <= wallet[tokenToSellName]) {
+			if (amountToSell <= wallet[tokenToSell!.name.toLowerCase()]) {
 				const userRef = doc(db, "users", auth.currentUser!.uid);
 				updateDoc(userRef, {
 					wallet: {
 						...wallet,
-						[tokenToSellName]:
-							wallet[tokenToSellName] - parseFloat(amountToSell as string),
-						[tokenToBuyName]:
-							wallet[tokenToBuyName] + amountToBuy || amountToBuy,
+						[tokenToSell!.name.toLowerCase()]:
+							wallet[tokenToSell!.name.toLowerCase()] -
+							parseFloat(amountToSell as string),
+						[tokenToBuy!.name.toLowerCase()]:
+							wallet[tokenToBuy!.name.toLowerCase()] + amountToBuy ||
+							amountToBuy,
 					},
 				});
 				setAmountToSell("");
@@ -84,10 +110,6 @@ function Exchange() {
 		});
 	}, []);
 
-	useEffect(() => {
-		setAmountToSell(inputRef.current!.value);
-	}, [inputRef.current?.value]);
-
 	return (
 		<div className={container}>
 			<div className={labelWithErrorContainer}>
@@ -106,31 +128,29 @@ function Exchange() {
 					ref={inputRef}
 					type="number"
 					min="0"
-					max={wallet[tokenToSellName]}
+					max={tokenToSell && wallet[tokenToSell!.name.toLowerCase()]}
 					step={step}
 					value={amountToSell}
 					placeholder="Enter an amount"
 					className={input}
 				/>
 				<Dropdown
-					state={tokenToSellName}
-					setState={setTokenToSellName}
-					options={wallet}
-					tokenToSellName={tokenToSellName}
-					type="Sell"
+					selectedToken={tokenToSell}
+					setSelectedToken={setTokenToSell}
+					options={market.filter((token) =>
+						Object.keys(wallet).includes(token.name.toLowerCase())
+					)}
 				/>
 			</div>
 			<Label className="my-2">For</Label>
 			<div className="pl-2 h-8 flex justify-between w-full rounded-md bg-slate-200">
 				<p className="items-center flex text-slate-400">
-					{amountToBuy > 0 && amountToBuy.toFixed(5)}
+					{amountToBuy?.toFixed(5)}
 				</p>
 				<Dropdown
-					state={tokenToBuyName}
-					setState={setTokenToBuyName}
-					options={market}
-					tokenToSellName={tokenToSellName}
-					type="Buy"
+					selectedToken={tokenToBuy}
+					setSelectedToken={setTokenToBuy}
+					options={buyOptions}
 				/>
 			</div>
 

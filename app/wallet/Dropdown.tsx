@@ -1,111 +1,71 @@
 "use client";
-import { Fragment, useEffect } from "react";
-import { Menu, Transition } from "@headlessui/react";
-import { ChevronDownIcon } from "@heroicons/react/20/solid";
-import { selectMarket } from "../../redux/reducers/marketSlice";
-import { useSelector } from "react-redux";
+import React, { useEffect, useRef, useState } from "react";
+import useOnClickOutside from "../../hooks/useOutsideClick";
 import { Crypto } from "../../typing";
-import {
-	button,
-	chevronDownIcon,
-	container,
-	item,
-	menu,
-} from "../styles/dropdown";
+import { button, container, item, menu } from "../styles/dropdown";
 
-export default function Dropdown({
-	state,
-	setState,
-	options,
-	tokenToSellName,
-	type,
-}: any) {
-	const market = useSelector(selectMarket);
-	const crypto = market.find(
-		(crypto: Crypto) => crypto.name.toLowerCase() === state
-	);
+interface DropdownProps {
+	selectedToken: Crypto | undefined;
+	setSelectedToken: (token: Crypto) => void;
+	options: Crypto[] | undefined;
+}
+function Dropdown({ selectedToken, setSelectedToken, options }: DropdownProps) {
+	const [isOpen, setIsOpen] = useState(false);
+	const [filteredOptions, setFilteredOptions] = useState<Crypto[]>();
+	const ref = useRef<HTMLDivElement>(null);
 
-	const isMarketDropdown = options[0]?.name !== undefined;
+	useOnClickOutside(ref, () => setIsOpen(false));
 
 	useEffect(() => {
-		isMarketDropdown &&
-			setState(
-				state.toLowerCase() === tokenToSellName.toLowerCase()
-					? options
-							.filter(
-								(crypto: Crypto) =>
-									crypto?.name.toLowerCase() != state.toLowerCase()
-							)[0]
-							.name.toLowerCase()
-					: crypto?.name.toLowerCase()
-			);
-	}, [tokenToSellName]);
+		if (options && !selectedToken) setSelectedToken(options[0]);
 
-	const getSymbol = (token: any): string => {
-		return market
-			.find((crypto: Crypto) => crypto?.name.toLowerCase() === token)
-			.symbol.toUpperCase();
-	};
+		setFilteredOptions(
+			options?.filter((token) => token.name !== selectedToken?.name)
+		);
+	}, [options, selectedToken]);
 
 	return (
-		<Menu as="div" className={container}>
-			<Menu.Button className={button}>
-				{market.length < 1
-					? type === "Buy"
-						? "ETH"
-						: "BTC"
-					: isMarketDropdown && state === tokenToSellName
-					? options
-							.filter((crypto: Crypto) => crypto.name.toLowerCase() != state)[0]
-							.symbol.toUpperCase()
-					: crypto?.symbol.toUpperCase()}
-				<ChevronDownIcon className={chevronDownIcon} aria-hidden="true" />
-			</Menu.Button>
-
-			<Transition
-				as={Fragment}
-				enter="transition ease-out duration-100"
-				enterFrom="transform opacity-0 scale-95"
-				enterTo="transform opacity-100 scale-100"
-				leave="transition ease-in duration-75"
-				leaveFrom="transform opacity-100 scale-100"
-				leaveTo="transform opacity-0 scale-95"
+		<div ref={ref} className={container}>
+			<button
+				onClick={() => setIsOpen(!isOpen)}
+				className={button + " rounded-l-none"}
 			>
-				<Menu.Items className={menu}>
-					{isMarketDropdown
-						? options
-								.filter(
-									(crypto: Crypto) =>
-										crypto.name.toLowerCase() != tokenToSellName.toLowerCase()
-								)
-								.map((option: Crypto) => (
-									<Menu.Item key={option.name}>
-										{() => (
-											<button
-												onClick={(e: any) =>
-													setState(option.name.toLowerCase())
-												}
-												className={item}
-											>
-												{option.symbol.toUpperCase()}
-											</button>
-										)}
-									</Menu.Item>
-								))
-						: Object.entries(options).map((option: any) => (
-								<Menu.Item key={option[0]}>
-									{() => (
-										<button
-											onClick={(e) => setState(option[0].toLowerCase())}
-											className={item}
-										>
-											{getSymbol(option[0])}
-										</button>
-									)}
-								</Menu.Item>
-						  ))}
-				</Menu.Items>
-			</Transition>
-		</Menu>
+				{selectedToken?.symbol.toUpperCase()}
+				<svg
+					fill="#000000"
+					height="24px"
+					className="-rotate-90 scale-50"
+					width="24px"
+					xmlns="http://www.w3.org/2000/svg"
+					viewBox="-49 -49 588.00 588.00"
+					stroke="#000000"
+					stroke-width="11.76"
+				>
+					<g stroke-linecap="round" id="SVGRepo_bgCarrier" stroke-width="0"></g>
+					<g stroke-linecap="round" id="SVGRepo_iconCarrier">
+						{" "}
+						<polygon
+							stroke-linecap="round"
+							points="410.312,454.729 151.767,244.996 410.312,35.271 381.693,0 79.688,244.996 381.693,490 "
+						></polygon>{" "}
+					</g>
+				</svg>
+			</button>
+			<div className={menu + `${!isOpen && "opacity-0 invisible"}`}>
+				{filteredOptions?.map((token: Crypto) => (
+					<button
+						className={item}
+						onClick={() => {
+							setSelectedToken(token);
+							setIsOpen(false);
+						}}
+					>
+						{token.symbol.toUpperCase()}
+					</button>
+				))}
+			</div>
+		</div>
 	);
 }
+
+export default Dropdown;
