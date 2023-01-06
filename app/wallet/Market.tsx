@@ -1,10 +1,11 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { selectMarket } from "../../redux/reducers/marketSlice";
 import { selectMoney, selectWallet } from "../../redux/reducers/walletSlice";
 import { Crypto } from "../../typing";
 import { isNumberKey, updateWallet } from "../../utils";
+import CustomNumberInputButtons from "../components/CustomNumberInputButtons";
 import { container, input, inputContainer } from "../styles/exchange";
 import Dropdown from "./Dropdown";
 
@@ -14,7 +15,7 @@ function Market() {
 	const market = useSelector(selectMarket);
 	const wallet = useSelector(selectWallet);
 	const usd = useSelector(selectMoney);
-
+	const inputRef = useRef<HTMLInputElement>(null);
 	const [selectedToken, setSelectedToken] = useState<Crypto>();
 
 	const manageToken = async (transactionType: string) => {
@@ -53,6 +54,8 @@ function Market() {
 					onChange={(e) => setAmount(e.target.value)}
 					type="number"
 					min="0"
+					step={10}
+					ref={inputRef}
 					value={amount}
 					placeholder="Enter an amount"
 					className={input}
@@ -68,30 +71,7 @@ function Market() {
 				>
 					<path d="M15.999 8.5h2c0-2.837-2.755-4.131-5-4.429V2h-2v2.071c-2.245.298-5 1.592-5 4.429 0 2.706 2.666 4.113 5 4.43v4.97c-1.448-.251-3-1.024-3-2.4h-2c0 2.589 2.425 4.119 5 4.436V22h2v-2.07c2.245-.298 5-1.593 5-4.43s-2.755-4.131-5-4.429V6.1c1.33.239 3 .941 3 2.4zm-8 0c0-1.459 1.67-2.161 3-2.4v4.799c-1.371-.253-3-1.002-3-2.399zm8 7c0 1.459-1.67 2.161-3 2.4v-4.8c1.33.239 3 .941 3 2.4z"></path>
 				</svg>
-				<div className="flex flex-col items-center justify-center h-full">
-					<button
-						className="shadow bg-gray-50 hover:bg-gray-100 px-2 w-5 flex items-center justify-center h-2/4 rounded-t rounded-tr-none "
-						onClick={() =>
-							setAmount((prev) =>
-								!prev ? 10 : parseFloat(prev as string) + 10
-							)
-						}
-					>
-						+
-					</button>
-					<button
-						className="shadow bg-gray-50 hover:bg-gray-100 px-2 w-5 flex items-center justify-center h-2/4 rounded-b rounded-br-none"
-						onClick={() =>
-							setAmount((prev) =>
-								prev && parseFloat(prev as string) - 10 > 0
-									? parseFloat(prev as string) - 10
-									: 0
-							)
-						}
-					>
-						-
-					</button>
-				</div>
+				<CustomNumberInputButtons inputRef={inputRef} setValue={setAmount} />
 				<Dropdown
 					selectedToken={selectedToken}
 					setSelectedToken={setSelectedToken}

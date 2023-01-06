@@ -23,9 +23,10 @@ import Error from "../components/Error";
 import { auth, db } from "../../firebaseConfig";
 import { doc, updateDoc } from "firebase/firestore";
 import Dropdown from "./Dropdown";
+import CustomNumberInputButtons from "../components/CustomNumberInputButtons";
 
 function Exchange() {
-	const [amountToSell, setAmountToSell] = useState<number | string>("");
+	const [amountToSell, setAmountToSell] = useState<string | number>("");
 	const dispatch = useDispatch();
 	const [market, setMarket] = useState<Crypto[]>([]);
 	const [tokenToSell, setTokenToSell] = useState<Crypto>();
@@ -34,7 +35,7 @@ function Exchange() {
 	const inputRef = useRef<HTMLInputElement>(null);
 	const [insufficientTokens, setInsufficientTokens] = useState(false);
 	const [price, setPrice] = useState(0);
-	const [step, setStep] = useState("0.1");
+	const [step, setStep] = useState(0.1);
 	const [amountToBuy, setAmountToBuy] = useState<number | null>(null);
 	const [buyOptions, setBuyOptions] = useState<Crypto[]>();
 
@@ -51,12 +52,12 @@ function Exchange() {
 			setPrice(tokenToSell!.current_price * (amountToSell as number));
 			setStep(
 				wallet[tokenToSell!.name.toLowerCase()] < 0.001
-					? "0.00001"
+					? 0.00001
 					: wallet[tokenToSell!.name.toLowerCase()] < 0.01
-					? "0.0001"
+					? 0.0001
 					: wallet[tokenToSell!.name.toLowerCase()] < 3
-					? "0.01"
-					: "0.1"
+					? 0.01
+					: 0.1
 			);
 		}
 	}, [tokenToSell, wallet, amountToSell, market]);
@@ -87,19 +88,24 @@ function Exchange() {
 						...wallet,
 						[tokenToSell!.name.toLowerCase()]:
 							wallet[tokenToSell!.name.toLowerCase()] -
-							parseFloat(amountToSell as string),
+							(amountToSell as number),
 						[tokenToBuy!.name.toLowerCase()]:
 							wallet[tokenToBuy!.name.toLowerCase()] + amountToBuy ||
 							amountToBuy,
 					},
 				});
-				setAmountToSell("");
+				setAmountToSell(0);
 				setInsufficientTokens(false);
 			} else {
 				setInsufficientTokens(true);
 			}
 		}
 	};
+
+	// useEffect(() => {
+	// 	console.log(inputRef);
+	// 	setAmountToSell(inputRef.current!.value);
+	// }, [inputRef.current?.value]);
 
 	useEffect(() => {
 		fetchCryptos().then((data) => {
@@ -133,6 +139,10 @@ function Exchange() {
 					value={amountToSell}
 					placeholder="Enter an amount"
 					className={input}
+				/>
+				<CustomNumberInputButtons
+					inputRef={inputRef}
+					setValue={setAmountToSell}
 				/>
 				<Dropdown
 					selectedToken={tokenToSell}
