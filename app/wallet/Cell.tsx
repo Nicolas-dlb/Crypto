@@ -22,8 +22,8 @@ function Cell({ name, amount }: CellProps) {
 	const value = token?.current_price * amount;
 
 	return (
-		<div className="text-slate-500 h-5 px-3 flex justify-around odd:bg-gray-100 ">
-			<p className="w-24 xs:w-20 flex flex-none overflow-hidden text-ellipsis  justify-start">
+		<div className="text-slate-500 h-5 px-3 flex justify-around odd:bg-gray-100 xs:text-xs ">
+			<p className="w-24 xs:w-20 flex  overflow-hidden text-ellipsis  justify-start">
 				{stringUppercaseFirst(name)}
 			</p>
 			<p className="w-24 xs:w-20 h-5 flex xs:justify-end justify-center">
