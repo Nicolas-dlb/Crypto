@@ -8,7 +8,7 @@ function Table() {
 	const wallet = useSelector(selectWallet);
 
 	return (
-		<div className="bg-slate-100 shadow rounded-md flex-col min-w-[140px] lg:w-full flex h-80 lg:h-[90vh]">
+		<div className="bg-slate-100 shadow rounded-md flex-col min-w-[140px] lg:w-full flex h-72 lg:h-[90vh]">
 			<div className="flex justify-around w-full h-fit border-b px-3 border-slate-300">
 				<p className="w-24 xs:w-20  h-fit flex justify-start font-medium text-slate-700">
 					Token
