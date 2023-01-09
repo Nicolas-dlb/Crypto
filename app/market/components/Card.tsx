@@ -1,7 +1,7 @@
 import Image from "next/image";
 import React from "react";
-import { Crypto } from "../../typing";
-import { getNumberFixed } from "../../utils";
+import { Crypto } from "../../../typing";
+import { getNumberFixed } from "../../../utils";
 
 function Card(crypto: Crypto) {
 	const priceChangeColor =

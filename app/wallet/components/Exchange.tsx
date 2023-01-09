@@ -7,23 +7,23 @@ import React, {
 	useState,
 } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getMarket } from "../../redux/reducers/marketSlice";
-import { selectWallet } from "../../redux/reducers/walletSlice";
-import { Crypto } from "../../typing";
-import { classNames, fetchCryptos, isNumberKey } from "../../utils";
-import Label from "../components/Label";
-import { button } from "../styles/globals";
+import { getMarket } from "../../../redux/reducers/marketSlice";
+import { selectWallet } from "../../../redux/reducers/walletSlice";
+import { Crypto } from "../../../typing";
+import { classNames, fetchCryptos, isNumberKey } from "../../../utils";
+import Label from "../../components/Label";
+import { button } from "../../styles/globals";
 import {
 	container,
 	input,
 	inputContainer,
 	labelWithErrorContainer,
-} from "../styles/exchange";
-import Error from "../components/Error";
-import { auth, db } from "../../firebaseConfig";
+} from "../../styles/exchange";
+import Error from "../../components/Error";
+import { auth, db } from "../../../firebaseConfig";
 import { doc, updateDoc } from "firebase/firestore";
-import Dropdown from "./Dropdown";
-import CustomNumberInputButtons from "../components/CustomNumberInputButtons";
+import Dropdown from "../../components/Dropdown";
+import CustomNumberInputButtons from "../../components/CustomNumberInputButtons";
 
 function Exchange() {
 	const [amountToSell, setAmountToSell] = useState<string | number>("");

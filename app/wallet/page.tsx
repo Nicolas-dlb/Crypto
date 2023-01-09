@@ -1,9 +1,9 @@
 import React from "react";
 import Title from "../components/Title";
 import Funds from "./components/Funds";
-import Exchange from "./Exchange";
-import Market from "./Market";
-import Table from "./Table";
+import Exchange from "./components/Exchange";
+import Market from "./components/Market";
+import Table from "./components/Table/Table";
 
 function Wallet() {
 	return (

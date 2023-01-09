@@ -1,6 +1,5 @@
 import React from "react";
-import "../styles/globals.css";
-import NavbarLink from "./components/NavbarLink";
+import NavbarLink from "./NavbarLink";
 
 function Navbar() {
 	return (

@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { useSelector } from "react-redux";
-import { selectWallet } from "../../redux/reducers/walletSlice";
+import { selectWallet } from "../../../../redux/reducers/walletSlice";
 import Cell from "./Cell";
 
 function Table() {

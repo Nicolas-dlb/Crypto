@@ -1,13 +1,13 @@
 "use client";
 import React from "react";
 import { useSelector } from "react-redux";
-import { selectMarket } from "../../redux/reducers/marketSlice";
-import { Crypto } from "../../typing";
+import { selectMarket } from "../../../../redux/reducers/marketSlice";
+import { Crypto } from "../../../../typing";
 import {
 	getNumberFixed,
 	numberWithSpaces,
 	stringUppercaseFirst,
-} from "../../utils";
+} from "../../../../utils";
 
 interface CellProps {
 	name: string;

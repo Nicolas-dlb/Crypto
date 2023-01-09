@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React from "react";
-import "../../styles/globals.css";
+import "../styles/globals.css";
 import Icons from "../../assets/categoryIcons";
 
 type MenuItemProps = {

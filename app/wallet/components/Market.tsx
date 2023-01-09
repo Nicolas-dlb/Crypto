@@ -1,13 +1,13 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
-import { selectMarket } from "../../redux/reducers/marketSlice";
-import { selectMoney, selectWallet } from "../../redux/reducers/walletSlice";
-import { Crypto } from "../../typing";
-import { isNumberKey, updateWallet } from "../../utils";
-import CustomNumberInputButtons from "../components/CustomNumberInputButtons";
-import { container, input, inputContainer } from "../styles/exchange";
-import Dropdown from "./Dropdown";
+import { selectMarket } from "../../../redux/reducers/marketSlice";
+import { selectMoney, selectWallet } from "../../../redux/reducers/walletSlice";
+import { Crypto } from "../../../typing";
+import { isNumberKey, updateWallet } from "../../../utils";
+import CustomNumberInputButtons from "../../components/CustomNumberInputButtons";
+import { container, input, inputContainer } from "../../styles/exchange";
+import Dropdown from "../../components/Dropdown";
 
 function Market() {
 	const [insufficientMoney, setInsufficientMoney] = useState(false);

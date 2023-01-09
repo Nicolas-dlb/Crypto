@@ -1,7 +1,7 @@
 import React from "react";
 import { Crypto } from "../../typing";
 import { fetchCryptos } from "../../utils";
-import Card from "./Card";
+import Card from "./components/Card";
 
 async function Market() {
 	const cryptos: Crypto[] = await fetchCryptos();
