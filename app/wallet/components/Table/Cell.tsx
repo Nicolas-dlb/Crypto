@@ -16,9 +16,7 @@ interface CellProps {
 
 function Cell({ name, amount }: CellProps) {
 	const market = useSelector(selectMarket);
-	const token = market?.find(
-		(token: Crypto) => token.name.toLowerCase() === name
-	);
+	const token = market?.find((token: Crypto) => token.name === name);
 	const value = token?.current_price * amount;
 
 	return (

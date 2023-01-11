@@ -22,7 +22,7 @@ function Market() {
 			(crypto: Crypto) => crypto.name === selectedToken!.name
 		);
 		let amountOfToken = (amount as number) / token.current_price;
-		const tokenName = selectedToken!.name.toLowerCase();
+		const tokenName = selectedToken!.name;
 
 		if (
 			amount &&

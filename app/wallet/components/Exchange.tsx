@@ -44,11 +44,11 @@ function Exchange() {
 		if (tokenToSell) {
 			setPrice(tokenToSell!.current_price * (amountToSell as number));
 			setStep(
-				wallet[tokenToSell!.name.toLowerCase()] < 0.001
+				wallet[tokenToSell!.name] < 0.001
 					? 0.00001
-					: wallet[tokenToSell!.name.toLowerCase()] < 0.01
+					: wallet[tokenToSell!.name] < 0.01
 					? 0.0001
-					: wallet[tokenToSell!.name.toLowerCase()] < 3
+					: wallet[tokenToSell!.name] < 3
 					? 0.01
 					: 0.1
 			);
@@ -74,17 +74,15 @@ function Exchange() {
 		e: MouseEvent | KeyboardEvent<HTMLInputElement>
 	): void => {
 		if (amountToSell) {
-			if (amountToSell <= wallet[tokenToSell!.name.toLowerCase()]) {
+			if (amountToSell <= wallet[tokenToSell!.name]) {
 				const userRef = doc(db, "users", auth.currentUser!.uid);
 				updateDoc(userRef, {
 					wallet: {
 						...wallet,
-						[tokenToSell!.name.toLowerCase()]:
-							wallet[tokenToSell!.name.toLowerCase()] -
-							(amountToSell as number),
-						[tokenToBuy!.name.toLowerCase()]:
-							wallet[tokenToBuy!.name.toLowerCase()] + amountToBuy ||
-							amountToBuy,
+						[tokenToSell!.name]:
+							wallet[tokenToSell!.name] - (amountToSell as number),
+						[tokenToBuy!.name]:
+							wallet[tokenToBuy!.name] + amountToBuy || amountToBuy,
 					},
 				});
 				setAmountToSell(0);
@@ -124,7 +122,7 @@ function Exchange() {
 					ref={inputRef}
 					type="number"
 					min="0"
-					max={tokenToSell && wallet[tokenToSell!.name.toLowerCase()]}
+					max={tokenToSell && wallet[tokenToSell!.name]}
 					step={step}
 					value={amountToSell}
 					placeholder="Enter an amount"
@@ -142,7 +140,7 @@ function Exchange() {
 					selectedToken={tokenToSell}
 					setSelectedToken={setTokenToSell}
 					options={market.filter((token) =>
-						Object.keys(wallet).includes(token.name.toLowerCase())
+						Object.keys(wallet).includes(token.name)
 					)}
 				/>
 			</div>

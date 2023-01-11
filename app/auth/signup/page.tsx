@@ -32,7 +32,7 @@ function page() {
 			.then(async (credentials) => {
 				const user = credentials.user;
 				await setDoc(doc(usersRef, user.uid), {
-					wallet: { bitcoin: 1, ethereum: 1, litecoin: 1 },
+					wallet: { Bitcoin: 1, Ethereum: 1, Litecoin: 1 },
 					usd: 20000,
 				});
 				router.push("/market");
