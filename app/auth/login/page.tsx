@@ -4,16 +4,6 @@ import { signInAnonymously, signInWithEmailAndPassword } from "firebase/auth";
 import { auth, db } from "../../../firebaseConfig";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import {
-	button,
-	buttonsGroup,
-	input,
-	inputContainer,
-	label,
-	modal,
-	screen,
-	title,
-} from "../../styles/auth";
 import { collection, doc, setDoc } from "firebase/firestore";
 
 function login() {
@@ -61,16 +51,21 @@ function login() {
 		e.key == "Enter" && signIn();
 	const toggleShowPassword = () => setShowPassword(!showPassword);
 
-	const backgroundColor = error ? "bg-rose-100" : "bg-white";
-
 	return (
-		<div className={screen}>
-			<div className={modal}>
-				<p className={title}>Welcome</p>
-				<label htmlFor="email" className={label}>
+		<div className="absolute w-screen h-screen flex justify-center items-center left-0 z-20 bg-slate-300">
+			<div className="bg-slate-100 shadow-md rounded-md w-9/12 max-w-sm p-3 gap-2 flex flex-col justify-between items-center">
+				<p className="text-base font-semibold text-slate-500">Welcome</p>
+				<label
+					htmlFor="email"
+					className="text-start w-full font-medium text-slate-500"
+				>
 					Email
 				</label>
-				<div className={inputContainer + backgroundColor}>
+				<div
+					className={`flex w-full h-9 rounded-md transition-all items-center ${
+						error ? "bg-rose-100" : "bg-white"
+					}`}
+				>
 					<input
 						onKeyPress={signInWithEnterKey}
 						onChange={handleEmailChange}
@@ -79,13 +74,20 @@ function login() {
 						name="email"
 						autoComplete="off"
 						placeholder="Enter your email"
-						className={input}
+						className="outline-none w-full bg-transparent transition-all rounded-md p-2 pr-0"
 					/>
 				</div>
-				<label htmlFor="password" className={label}>
+				<label
+					htmlFor="password"
+					className="text-start w-full font-medium text-slate-500"
+				>
 					Password
 				</label>
-				<div className={inputContainer + backgroundColor}>
+				<div
+					className={`flex w-full h-9 rounded-md transition-all items-center pr-2 ${
+						error ? "bg-rose-100" : "bg-white"
+					}`}
+				>
 					<input
 						onKeyPress={signInWithEnterKey}
 						onChange={handlePasswordChange}
@@ -94,7 +96,7 @@ function login() {
 						name="password"
 						autoComplete="off"
 						placeholder="Enter your password"
-						className={input}
+						className="outline-none w-full bg-transparent transition-all rounded-md p-2 pr-0"
 					/>
 					{showPassword ? (
 						<svg
@@ -123,11 +125,17 @@ function login() {
 						</svg>
 					)}
 				</div>
-				<div className={buttonsGroup}>
-					<button onClick={signIn} className={button}>
+				<div className="flex w-full h-24 md:h-fit md:my-3 flex-col md:flex-row items-center justify-around">
+					<button
+						onClick={signIn}
+						className="rounded-md text-slate-500 shadow font-medium text-xs p-2 flex-none flex items-center justify-center w-full bg-slate-200 hover:bg-slate-300 md:w-1/3"
+					>
 						login
 					</button>
-					<button onClick={signInDemoAccount} className={button}>
+					<button
+						onClick={signInDemoAccount}
+						className="rounded-md text-slate-500 shadow font-medium text-xs p-2 flex-none flex items-center justify-center w-full bg-slate-200 hover:bg-slate-300 md:w-1/3"
+					>
 						Demo account
 					</button>
 				</div>

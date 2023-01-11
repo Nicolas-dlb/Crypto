@@ -27,7 +27,7 @@ function CustomNumberInputButtons({
 	return (
 		<div className="flex flex-col items-center justify-center h-full">
 			<button
-				className="shadow bg-gray-50 hover:bg-gray-100 px-2 w-5 flex items-center justify-center h-2/4 rounded-t rounded-tr-none "
+				className="shadow bg-gray-50 hover:bg-gray-100 px-2 w-5 flex items-center justify-center h-2/4 rounded-t rounded-tr-none"
 				onClick={() => changeValue()}
 				onMouseDown={() => setMouseDown(true)}
 				onMouseUp={() => setMouseDown(false)}

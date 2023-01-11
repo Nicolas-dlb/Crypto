@@ -5,15 +5,9 @@ import { useRouter } from "next/navigation";
 import React, { ChangeEvent, useState } from "react";
 import { auth, db } from "../../../firebaseConfig";
 import {
-	button,
-	buttonsGroup,
-	input,
-	label,
-	modal,
-	screen,
-	title,
-} from "../../styles/auth";
-import { getInputStyleWithStates, getSpanStyleWithStates } from "../getStyles";
+	getInputStyleWithStates,
+	getSpanStyleWithStates,
+} from "./getInputStyles";
 import { validEmailRegex } from "../../../utils";
 import { collection, doc, setDoc } from "firebase/firestore";
 
@@ -50,10 +44,13 @@ function page() {
 	};
 
 	return (
-		<div className={screen}>
-			<div className={modal}>
-				<p className={title}>Sign up</p>
-				<label htmlFor="email" className={label}>
+		<div className="absolute w-screen h-screen flex justify-center items-center left-0 z-20 bg-slate-300">
+			<div className="bg-slate-100 shadow-md rounded-md w-9/12 max-w-sm p-3 gap-2 flex flex-col justify-between items-center">
+				<p className="text-base font-semibold text-slate-500">Sign up</p>
+				<label
+					htmlFor="email"
+					className="text-start w-full font-medium text-slate-500"
+				>
 					Email
 				</label>
 				<div className={getInputStyleWithStates(email, isValidEmail)}>
@@ -65,15 +62,17 @@ function page() {
 						name="email"
 						autoComplete="off"
 						placeholder="Enter your email"
-						className={input}
+						className="outline-none w-full bg-transparent transition-all rounded-md p-2 pr-0"
 					/>
 				</div>
-				<label htmlFor="password" className={label}>
+				<label
+					htmlFor="password"
+					className="text-start w-full font-medium text-slate-500"
+				>
 					Password
 				</label>
 				<div className={getInputStyleWithStates(password, isValidPassword)}>
 					<span className={getSpanStyleWithStates(password, isValidPassword)} />
-
 					<input
 						onChange={handlePasswordChange}
 						type="new-password"
@@ -81,14 +80,20 @@ function page() {
 						name="password"
 						autoComplete="off"
 						placeholder="Enter your password"
-						className={input}
+						className="outline-none w-full bg-transparent transition-all rounded-md p-2 pr-0"
 					/>
 				</div>
-				<div className={buttonsGroup + "md:flex-row-reverse"}>
-					<button onClick={createUser} className={button}>
+				<div className="flex w-full h-24 md:h-fit md:my-3 flex-col items-center justify-around md:flex-row-reverse">
+					<button
+						onClick={createUser}
+						className="rounded-md text-slate-500 shadow font-medium text-xs p-2 flex-none flex items-center justify-center w-full bg-slate-200 hover:bg-slate-300 md:w-1/3"
+					>
 						Create account
 					</button>
-					<Link href="/auth/login" className={button + "pr-5 md:pr-4"}>
+					<Link
+						href="/auth/login"
+						className="rounded-md text-slate-500 shadow font-medium text-xs p-2 flex-none flex items-center justify-center w-full bg-slate-200 hover:bg-slate-300 md:w-1/3 pr-5 md:pr-4"
+					>
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
 							width="20"

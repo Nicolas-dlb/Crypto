@@ -20,7 +20,7 @@ function Table() {
 					value
 				</p>
 			</div>
-			<div className="flex-col overflow-scroll rounded-md flex items-between justify-start h-full bg-white ">
+			<div className="flex-col overflow-scroll rounded-md flex items-between justify-start h-full bg-white">
 				{Object.entries(wallet)
 					.concat(Array.from(Array(40).fill(["", null])))
 					.map((token: any, i: number) => {

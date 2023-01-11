@@ -3,7 +3,7 @@ import ReduxProvider from "./providers/ReduxProvider";
 import { Inter } from "@next/font/google";
 import setupLocatorUI from "@locator/runtime";
 import WalletProvider from "./providers/WalletProvider";
-import "./styles/globals.css";
+import "../styles/globals.css";
 
 const inter = Inter({
 	subsets: ["latin"],

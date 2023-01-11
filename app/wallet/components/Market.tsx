@@ -6,7 +6,6 @@ import { selectMoney, selectWallet } from "../../../redux/reducers/walletSlice";
 import { Crypto } from "../../../typing";
 import { isNumberKey, updateWallet } from "../../../utils";
 import CustomNumberInputButtons from "../../components/CustomNumberInputButtons";
-import { container, input, inputContainer } from "../../styles/exchange";
 import Dropdown from "../../components/Dropdown";
 
 function Market() {
@@ -47,13 +46,16 @@ function Market() {
 	}, [market]);
 
 	return (
-		<div className={container + " mt-2"}>
+		<div className="bg-slate-100 shadow flex-col flex justify-between rounded-md p-4 lg:w-11/12 mt-2">
 			<div
-				className={inputContainer + `${insufficientMoney && "bg-rose-200"} `}
+				className={`h-8 flex justify-between w-full rounded-md items-center ${
+					insufficientMoney ? "bg-rose-200" : "bg-white"
+				} `}
 			>
 				<div
-					className={`h-full xs:hidden flex p-1 pointer-events-none items-center justify-center shadow-sm rounded-[3px] 
-						${insufficientMoney ? "bg-rose-300" : "bg-gray-50"}`}
+					className={`h-full xs:hidden flex p-1 pointer-events-none items-center justify-center shadow-sm rounded-[3px] ${
+						insufficientMoney ? "bg-rose-300" : "bg-gray-50"
+					}`}
 				>
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
@@ -74,9 +76,11 @@ function Market() {
 					ref={inputRef}
 					value={amount}
 					placeholder="Enter an amount"
-					className={
-						input + `${insufficientMoney && "placeholder:text-[#e07382]"}`
-					}
+					className={`bg-transparent w-full h-full rounded-md outline-none pl-2 ${
+						insufficientMoney
+							? "placeholder:text-[#e07382]"
+							: "placeholder:text-slate-400"
+					}`}
 				/>
 
 				<CustomNumberInputButtons inputRef={inputRef} setValue={setAmount} />

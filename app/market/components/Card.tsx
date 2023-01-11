@@ -4,9 +4,6 @@ import { Crypto } from "../../../typing";
 import { getNumberFixed } from "../../../utils";
 
 function Card(crypto: Crypto) {
-	const priceChangeColor =
-		crypto?.price_change_percentage_24h > 0 ? "text-teal-500" : "text-rose-500";
-
 	return (
 		<div className="bg-slate-100 shadow flex items-center rounded-md m-2 p-3 text-center text-slate-700 font-medium justify-between">
 			<Image
@@ -25,7 +22,11 @@ function Card(crypto: Crypto) {
 				<p>{getNumberFixed(crypto?.current_price, 2)}$</p>
 			</div>
 			<div
-				className={`${priceChangeColor} w-1/6 m-0 p-0 items-center flex h-fit xs:hidden`}
+				className={`w-1/6 m-0 p-0 items-center flex h-fit xs:hidden ${
+					crypto?.price_change_percentage_24h > 0
+						? "text-teal-500"
+						: "text-rose-500"
+				}`}
 			>
 				<p> {getNumberFixed(crypto?.price_change_percentage_24h, 2)}%</p>
 			</div>

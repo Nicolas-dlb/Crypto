@@ -8,7 +8,7 @@ function UserMoney() {
 	const usd = useSelector(selectMoney);
 
 	return (
-		<div className="flex justify-end items-center w-fit flex-none p-1 px-2 mb-1 bg-slate-100 rounded ">
+		<div className="flex justify-end items-center w-fit flex-none p-1 px-2 mb-1 bg-slate-100 rounded">
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
 				width="24"

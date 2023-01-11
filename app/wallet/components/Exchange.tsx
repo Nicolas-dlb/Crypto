@@ -10,15 +10,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { getMarket } from "../../../redux/reducers/marketSlice";
 import { selectWallet } from "../../../redux/reducers/walletSlice";
 import { Crypto } from "../../../typing";
-import { classNames, fetchCryptos, isNumberKey } from "../../../utils";
+import { fetchCryptos, isNumberKey } from "../../../utils";
 import Label from "../../components/Label";
-import { button } from "../../styles/globals";
-import {
-	container,
-	input,
-	inputContainer,
-	labelWithErrorContainer,
-} from "../../styles/exchange";
 import Error from "../../components/Error";
 import { auth, db } from "../../../firebaseConfig";
 import { doc, updateDoc } from "firebase/firestore";
@@ -102,11 +95,6 @@ function Exchange() {
 		}
 	};
 
-	// useEffect(() => {
-	// 	console.log(inputRef);
-	// 	setAmountToSell(inputRef.current!.value);
-	// }, [inputRef.current?.value]);
-
 	useEffect(() => {
 		fetchCryptos().then((data) => {
 			if (data !== market && data) {
@@ -117,13 +105,15 @@ function Exchange() {
 	}, []);
 
 	return (
-		<div className={container}>
-			<div className={labelWithErrorContainer}>
+		<div className="bg-slate-100 shadow flex-col flex justify-between rounded-md p-4 lg:w-11/12">
+			<div className="flex w-[160px] justify-between">
 				<Label className="mb-2">Swap</Label>
 				<Error>{insufficientTokens && "Insufficient tokens"}</Error>
 			</div>
 			<div
-				className={inputContainer + `${insufficientTokens && "bg-rose-200"}`}
+				className={`h-8 flex justify-between w-full rounded-md items-center ${
+					insufficientTokens ? "bg-rose-200" : "bg-white"
+				}`}
 			>
 				<input
 					onKeyPress={(e) => {
@@ -138,7 +128,11 @@ function Exchange() {
 					step={step}
 					value={amountToSell}
 					placeholder="Enter an amount"
-					className={input}
+					className={`bg-transparent w-full h-full rounded-md outline-none pl-2 ${
+						insufficientTokens
+							? "placeholder:text-[#e07382]"
+							: "placeholder:text-slate-400"
+					}`}
 				/>
 				<CustomNumberInputButtons
 					inputRef={inputRef}
@@ -164,7 +158,10 @@ function Exchange() {
 				/>
 			</div>
 
-			<button onClick={swapTokens} className={classNames(button, "mt-4")}>
+			<button
+				onClick={swapTokens}
+				className="bg-slate-200 mt-4 hover:bg-slate-300 rounded-md text-slate-500 shadow font-medium text-xs p-2 flex-none flex items-center justify-center w-full"
+			>
 				Exchange
 			</button>
 		</div>

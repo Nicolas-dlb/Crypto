@@ -2,7 +2,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import useOnClickOutside from "../../hooks/useOutsideClick";
 import { Crypto } from "../../typing";
-import { button, container, item, menu } from "../styles/dropdown";
 
 interface DropdownProps {
 	selectedToken: Crypto | undefined;
@@ -25,10 +24,10 @@ function Dropdown({ selectedToken, setSelectedToken, options }: DropdownProps) {
 	}, [options, selectedToken]);
 
 	return (
-		<div ref={ref} className={container}>
+		<div ref={ref} className="relative h-full inline-block text-left">
 			<button
 				onClick={() => setIsOpen(!isOpen)}
-				className={button + " rounded-l-none"}
+				className="h-full w-30 inline-flex w-24 xs:w-20 justify-end rounded-r-md rounded-l-none border-gray-300 px-4 xs:px-2 items-center text-sm xs:text-xs font-medium text-gray-700 shadow outline-none bg-gray-50"
 			>
 				{selectedToken?.symbol.toUpperCase()}
 				<svg
@@ -43,18 +42,21 @@ function Dropdown({ selectedToken, setSelectedToken, options }: DropdownProps) {
 				>
 					<g stroke-linecap="round" id="SVGRepo_bgCarrier" stroke-width="0"></g>
 					<g stroke-linecap="round" id="SVGRepo_iconCarrier">
-						{" "}
 						<polygon
 							stroke-linecap="round"
 							points="410.312,454.729 151.767,244.996 410.312,35.271 381.693,0 79.688,244.996 381.693,490 "
-						></polygon>{" "}
+						></polygon>
 					</g>
 				</svg>
 			</button>
-			<div className={menu + `${!isOpen && "opacity-0 invisible"}`}>
+			<div
+				className={`absolute right-0 z-10 mt-2 w-36 xs:w-32 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none transition-all overflow-scroll min-h-full max-h-40 ${
+					!isOpen && "opacity-0 invisible"
+				}`}
+			>
 				{filteredOptions?.map((token: Crypto) => (
 					<button
-						className={item}
+						className="block w-full text-start px-4 py-2 text-sm xs:text-xs hover:bg-gray-100 hover:text-gray-900 text-gray-700"
 						onClick={() => {
 							setSelectedToken(token);
 							setIsOpen(false);
