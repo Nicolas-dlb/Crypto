@@ -1,6 +1,6 @@
 # Crypto
 
-work in progress ...
+Work in progress ...
 
 ## How to use
 
