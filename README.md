@@ -1,6 +1,6 @@
 # Crypto
 
-This project is currently available at : https://crypto-nicolas-dlb.vercel.app
+work in progress ...
 
 ## How to use
 
